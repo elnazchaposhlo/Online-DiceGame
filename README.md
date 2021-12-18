@@ -1,5 +1,3 @@
-# Project9-main--C
-Project Sockets
-An online game for clients and server through Sockets
-
-It is a very interesting fun game to play.!
+# Server-Client-DiceGame
+This is a server-client program which implement a simple online dice game by using system calls. 
+In this program server and client can communicate with each other through Sockets.
