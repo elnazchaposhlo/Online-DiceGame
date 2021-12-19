@@ -7,7 +7,7 @@
 	Dr. Boubakeur Boufama
 */
 
-//Client side
+//client side
 
 
 #include <stdio.h>
@@ -23,7 +23,7 @@
 #include <arpa/inet.h>
 
 
-//The C library function strcmp() compares the string pointed to, by str1 to the string pointed to by str2.
+//the C library function strcmp() compares the string pointed to, by str1 to the string pointed to by str2.
 int strcmp (const char* str1, const char* str2);
 
 
@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 	char message[255];
 	int server, portNumber;
 	socklen_t len;
-	struct sockaddr_in servAdd; // server socket address
+	struct sockaddr_in servAdd; 		// server socket address
 
 	int dice = 0;
 
@@ -43,15 +43,16 @@ int main(int argc, char *argv[])
 	  }
 
 	//checks whether socket is created or not
-	if((server = socket(AF_INET, SOCK_STREAM, 0))<0){//Create socket
+	if((server = socket(AF_INET, SOCK_STREAM, 0))<0){
 	   fprintf(stderr, "Cannot create socket\n");
 	   exit(1);
 	  }
 
-	servAdd.sin_family = AF_INET; //Domain for Internet, AF -> Address Family
+	servAdd.sin_family = AF_INET; 		//Domain for Internet, AF -> Address Family
 	sscanf(argv[2], "%d", &portNumber);
-	servAdd.sin_port = htons((uint16_t)portNumber); //host to network for short integer : port number
+	servAdd.sin_port = htons((uint16_t)portNumber); 		//host to network for short integer : port number
 
+	
 	// checks whether input is a valid IPv4 dotted-decimal string or not
 	if(inet_pton(AF_INET, argv[1], &servAdd.sin_addr)<0){
 	   fprintf(stderr, " inet_pton() has failed\n");
@@ -66,7 +67,7 @@ int main(int argc, char *argv[])
 
 	//reads message from server
 	while(1){//An infinite loop
-	read(server, message, 255); //reading server's messages
+	read(server, message, 255); 		//reading server's messages
 	printf("\nMessage received: %s\n\n", message);
 
 
@@ -74,24 +75,24 @@ int main(int argc, char *argv[])
 	if(!strcmp(message, "You can now play.")){
 	   printf("Playing my dice.\n\n");
 
-	   srand(time(0));//generate random number
+	   srand(time(0));		//generate random number
 	   dice = (rand() % 6) + 1;
 
-     	   printf("I got %d points.\n\n", dice);//prints score to the screen
-	   write(server, &dice, 255); //sending its score to server
+     	   printf("I got %d points.\n\n", dice);		//prints score to the screen
+	   write(server, &dice, 255); 		//sending its score to server
 	 }
 
 	//checks server message if client has won
 	else if(!strcmp(message,"Game over: TOTO! You won the game.")){
 	   printf("Wohoo! I won the game.\n");
-	   close(server);//Close socket
+	   close(server);		//close socket
 	   exit(0);
 	         }
 
 	//checks server message if client has lose
 	 else if(!strcmp(message, "Game over: TITI! You lost the game.")){
 	   printf("Sigh! I lose the game.\n");
-	   close(server);
+	   close(server);		//close socket
 	   exit(0);
 	 	 }
 	}
