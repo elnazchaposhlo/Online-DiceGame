@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
 	  }
 
 	//checks whether the connection with server is established or not
-	if(connect(server, (struct sockaddr *) &servAdd, sizeof(servAdd))<0){//Client connect to server
+	if(connect(server, (struct sockaddr *) &servAdd, sizeof(servAdd))<0){
 	   fprintf(stderr, "connect() has failed, exiting\n");
 	   exit(3);
 	  }
